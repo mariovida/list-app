@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NavLink } from "react-router-dom";
-import Logo from "/lists-logo.svg";
+import Logo from "/listapp-logo.svg";
 
 import "../App.scss";
 
