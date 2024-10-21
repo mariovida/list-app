@@ -12,6 +12,7 @@ const ListPage = () => {
   const [listName, setListName] = useState<string>("");
   const [items, setItems] = useState<string[]>([]);
   const [input, setInput] = useState<string>("");
+  const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
 
   const socket = React.useRef<any>(null);
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -67,48 +68,81 @@ const ListPage = () => {
     exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
   };
 
+  const toggleMobileAddSection = () => {
+    setIsMobileAddOpen((prevState) => !prevState);
+  };
+
   return (
-    <section className="list">
-      <div className="wrapper">
-        <h1>{listName}</h1>
-        <div className="list-box">
-          <div className="list-items">
-            <div className="list-items_content">
-              <AnimatePresence>
-                {items.map((item, index) => (
-                  <motion.div
-                    className="list-item"
-                    key={item}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                  >
-                    <span>{item}</span>
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteItem(item)}
+    <>
+      <section className="list">
+        <div className="wrapper">
+          <h1>{listName}</h1>
+          <div className="list-box">
+            <div className="list-items">
+              <div className="list-items_content">
+                <AnimatePresence>
+                  {items.map((item, index) => (
+                    <motion.div
+                      className="list-item"
+                      key={item}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
                     >
-                      <img src={XIcon} alt="Delete" />
-                    </button>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                      <span>{item}</span>
+                      <button
+                        className="delete-btn"
+                        onClick={() => deleteItem(item)}
+                      >
+                        <img src={XIcon} alt="Delete" />
+                      </button>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </div>
+            <div className="list-add">
+              <p className="list-add_title">Add item</p>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="What would you like to add?"
+              />
+              <button onClick={addItem}>Add Item</button>
             </div>
           </div>
-          <div className="list-add">
-            <p className="list-add_title">Add item</p>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="What would you like to add?"
-            />
-            <button onClick={addItem}>Add Item</button>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section
+        className={`list-add_mobile ${
+          isMobileAddOpen ? "list-add_mobile--open" : ""
+        }`}
+      >
+        <button className="mobile-toggle" onClick={toggleMobileAddSection}>
+          {isMobileAddOpen ? "Cancel" : "Add Item"}
+        </button>
+        <div
+          className={`list-add_mobile_form ${
+            isMobileAddOpen ? "list-add_mobile_form--open" : ""
+          }`}
+        >
+          {isMobileAddOpen && (
+            <>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Add an item"
+              />
+              <button onClick={addItem}>Add Item</button>
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

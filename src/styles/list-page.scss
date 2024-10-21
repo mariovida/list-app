@@ -110,6 +110,29 @@
         background-color: $c-9;
       }
     }
+
+    &_mobile {
+      display: none;
+      position: fixed;
+      bottom: -1px;
+      width: 100%;
+      min-height: 20px;
+      padding: 20px 16px;
+      background-color: $c-9;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      transition: height 0.4s;
+
+      &_form {
+        height: 0;
+        padding: 16px 0;
+        transition: height 0.5s;
+
+        &--open {
+          height: 200px;
+        }
+      }
+    }
   }
 }
 
@@ -119,5 +142,9 @@
   }
   .list-add {
     display: none;
+
+    &_mobile {
+      display: unset;
+    }
   }
 }
