@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 
 import XIcon from "../assets/x.svg";
+import ChevronUp from "../assets/chevron-up.svg";
 import "../App.scss";
 
 const ListPage = () => {
@@ -122,7 +123,8 @@ const ListPage = () => {
         }`}
       >
         <button className="mobile-toggle" onClick={toggleMobileAddSection}>
-          {isMobileAddOpen ? "Cancel" : "Add Item"}
+          <span>Add item</span>
+          {isMobileAddOpen ? <img src={ChevronUp} /> : <img src={ChevronUp} />}
         </button>
         <div
           className={`list-add_mobile_form ${
