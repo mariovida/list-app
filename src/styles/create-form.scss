@@ -52,18 +52,22 @@
 
   &_success {
     display: flex;
-    gap: 16px;
+    gap: 12px;
 
     button {
       font-size: 14px;
       font-weight: 600;
       padding: 8px 16px;
+      transition: background-color 0.3s;
+
+      &:nth-child(1):hover {
+        background-color: $c-9;
+      }
 
       &:nth-child(2) {
-        padding: 8px 10px;
-        color: $c-11;
+        padding: 8px 12px;
+        color: $c-7;
         background-color: transparent;
-        transition: background-color 0.3s;
 
         &:hover {
           background-color: $c-3;
