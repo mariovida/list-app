@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -16,7 +17,10 @@ const ListPage = () => {
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
 
   const socket = React.useRef<any>(null);
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  let backendUrl = import.meta.env.VITE_BACKEND_URL;
+  if (import.meta.env.VITE_ENV === "production") {
+    backendUrl = import.meta.env.VITE_BACKEND_URL_PROD;
+  }
 
   useEffect(() => {
     axios
@@ -75,6 +79,9 @@ const ListPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>List | AddIt</title>
+      </Helmet>
       <section className="list">
         <div className="wrapper">
           <h1>{listName}</h1>
@@ -82,7 +89,7 @@ const ListPage = () => {
             <div className="list-items">
               <div className="list-items_content">
                 <AnimatePresence>
-                  {items.map((item, index) => (
+                  {items.map((item) => (
                     <motion.div
                       className="list-item"
                       key={item}
