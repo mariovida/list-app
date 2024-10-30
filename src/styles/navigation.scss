@@ -1,6 +1,10 @@
 nav {
   margin-bottom: 40px;
 
+  @media screen and (max-width: 768px) {
+    margin-bottom: 0;
+  }
+
   .wrapper {
     padding: 10px 16px;
     border-bottom: 2px solid $c-4;

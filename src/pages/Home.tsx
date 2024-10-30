@@ -18,7 +18,7 @@ const svgList = [Svg1, Svg2, Svg3, Svg4, Svg5, Svg6];
 const Home = () => {
   const [displayedSvgList, setDisplayedSvgList] = useState<string[]>([]);
   const updateDisplayedSvgList = () => {
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 769;
     setDisplayedSvgList(isMobile ? svgList.slice(0, 3) : svgList);
   };
 
