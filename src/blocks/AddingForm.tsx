@@ -9,6 +9,11 @@ const AddingForm = () => {
   const [createdListId, setCreatedListId] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  let backendUrl = import.meta.env.VITE_BACKEND_URL;
+  if (import.meta.env.VITE_ENV === "production") {
+    backendUrl = import.meta.env.VITE_BACKEND_URL_PROD;
+  }
+
   const createList = () => {
     if (listName.trim() === "") {
       alert("Please enter a list name.");
@@ -16,7 +21,7 @@ const AddingForm = () => {
     }
 
     axios
-      .post("http://localhost:3000/api/create-list", { name: listName })
+      .post(`${backendUrl}/api/create-list`, { name: listName })
       .then((res) => {
         setCreatedListId(res.data.id);
       })
