@@ -39,14 +39,14 @@ const ListPage = () => {
         console.error("Error fetching list data:", error);
       });
 
-    socket.current = io(backendUrl);
+    /*socket.current = io(backendUrl);
     socket.current.emit("joinList", uuid);
     socket.current.on("listUpdated", (updatedList: Item[]) => {
       setItems(updatedList);
     });
     return () => {
       socket.current.disconnect();
-    };
+    };*/
   }, [uuid, backendUrl]);
 
   const addItem = () => {
