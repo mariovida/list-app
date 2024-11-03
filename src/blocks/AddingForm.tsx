@@ -23,7 +23,7 @@ const AddingForm = () => {
     axios
       .post(`${backendUrl}/api/create-list`, { name: listName })
       .then((res) => {
-        setCreatedListId(res.data.id);
+        setCreatedListId(res.data.uuid);
       })
       .catch((err) => {
         console.error("Error creating list:", err);

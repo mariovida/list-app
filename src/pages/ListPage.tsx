@@ -5,14 +5,20 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 
-import XIcon from "../assets/x.svg";
+//import XIcon from "../assets/x.svg";
 import ChevronUp from "../assets/chevron-up.svg";
 import "../App.scss";
 
+interface Item {
+  id: string;
+  created_at: string;
+  item: string;
+}
+
 const ListPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id: uuid } = useParams<{ id: string }>();
   const [listName, setListName] = useState<string>("");
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [input, setInput] = useState<string>("");
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
 
@@ -24,9 +30,9 @@ const ListPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${backendUrl}/api/lists/${id}`)
+      .get(`${backendUrl}/api/lists/${uuid}`)
       .then((res) => {
-        setListName(res.data.name || "Unnamed List");
+        setListName(res.data.list.name || "Unnamed List");
         setItems(res.data.items || []);
       })
       .catch((error) => {
@@ -34,19 +40,19 @@ const ListPage = () => {
       });
 
     socket.current = io(backendUrl);
-    socket.current.emit("joinList", id);
-    socket.current.on("listUpdated", (updatedList: string[]) => {
+    socket.current.emit("joinList", uuid);
+    socket.current.on("listUpdated", (updatedList: Item[]) => {
       setItems(updatedList);
     });
     return () => {
       socket.current.disconnect();
     };
-  }, [id, backendUrl]);
+  }, [uuid, backendUrl]);
 
   const addItem = () => {
     if (input.trim() !== "") {
       axios
-        .post(`${backendUrl}/api/lists/${id}`, { item: input })
+        .post(`${backendUrl}/api/lists/${uuid}`, { item: input })
         .then(() => {
           setInput("");
         })
@@ -56,16 +62,20 @@ const ListPage = () => {
     }
   };
 
-  const deleteItem = (item: string) => {
+  /*const deleteItem = (item: string) => {
     axios
-      .delete(`${backendUrl}/api/lists/${id}/item`, { data: { item } })
+      .delete(`${backendUrl}/api/lists/${uuid}/item`, {
+        data: { item: item },
+      })
       .then(() => {
-        setItems((prevItems) => prevItems.filter((i) => i !== item));
+        setItems((prevItems) =>
+          prevItems.filter((item) => item.item !== item)
+        );
       })
       .catch((error) => {
         console.error("Error deleting item:", error);
       });
-  };
+  };*/
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -92,19 +102,19 @@ const ListPage = () => {
                   {items.map((item) => (
                     <motion.div
                       className="list-item"
-                      key={item}
+                      key={item.id}
                       variants={itemVariants}
                       initial="hidden"
                       animate="visible"
                       exit="exit"
                     >
-                      <span>{item}</span>
-                      <button
+                      <span>{item.item}</span>
+                      {/* <button
                         className="delete-btn"
-                        onClick={() => deleteItem(item)}
+                        onClick={() => deleteItem(item.item)}
                       >
                         <img src={XIcon} alt="Delete" />
-                      </button>
+                      </button> */}
                     </motion.div>
                   ))}
                 </AnimatePresence>
