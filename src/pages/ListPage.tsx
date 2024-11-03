@@ -22,7 +22,7 @@ const ListPage = () => {
   const [input, setInput] = useState<string>("");
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
 
-  const socket = React.useRef<any>(null);
+  //const socket = React.useRef<any>(null);
   let backendUrl = import.meta.env.VITE_BACKEND_URL;
   if (import.meta.env.VITE_ENV === "production") {
     backendUrl = import.meta.env.VITE_BACKEND_URL_PROD;
