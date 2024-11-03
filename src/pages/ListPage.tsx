@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { io } from "socket.io-client";
+//import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 
 //import XIcon from "../assets/x.svg";
