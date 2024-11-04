@@ -32,6 +32,7 @@ const ListPage = () => {
     axios
       .get(`${backendUrl}/api/lists/${uuid}`)
       .then((res) => {
+        console.log(res);
         setListName(res.data.list.name || "Unnamed List");
         setItems(res.data.items || []);
       })
