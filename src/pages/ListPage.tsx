@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-//import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 
 //import XIcon from "../assets/x.svg";
@@ -22,7 +22,7 @@ const ListPage = () => {
   const [input, setInput] = useState<string>("");
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
 
-  //const socket = React.useRef<any>(null);
+  const socket = React.useRef<any>(null);
   let backendUrl = import.meta.env.VITE_BACKEND_URL;
   if (import.meta.env.VITE_ENV === "production") {
     backendUrl = import.meta.env.VITE_BACKEND_URL_PROD;
@@ -40,14 +40,14 @@ const ListPage = () => {
         console.error("Error fetching list data:", error);
       });
 
-    /*socket.current = io(backendUrl);
+    socket.current = io(backendUrl);
     socket.current.emit("joinList", uuid);
     socket.current.on("listUpdated", (updatedList: Item[]) => {
       setItems(updatedList);
     });
     return () => {
       socket.current.disconnect();
-    };*/
+    };
   }, [uuid, backendUrl]);
 
   const addItem = () => {
