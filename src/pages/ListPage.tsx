@@ -5,7 +5,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 
-//import XIcon from "../assets/x.svg";
+import XIcon from "../assets/x.svg";
 import ChevronUp from "../assets/chevron-up.svg";
 import "../App.scss";
 
@@ -63,20 +63,16 @@ const ListPage = () => {
     }
   };
 
-  /*const deleteItem = (item: string) => {
+  const deleteItem = (itemId: string) => {
     axios
-      .delete(`${backendUrl}/api/lists/${uuid}/item`, {
-        data: { item: item },
-      })
+      .delete(`${backendUrl}/api/lists/${uuid}/items/${itemId}`)
       .then(() => {
-        setItems((prevItems) =>
-          prevItems.filter((item) => item.item !== item)
-        );
+        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
       })
       .catch((error) => {
         console.error("Error deleting item:", error);
       });
-  };*/
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -110,12 +106,12 @@ const ListPage = () => {
                       exit="exit"
                     >
                       <span>{item.item}</span>
-                      {/* <button
+                      <button
                         className="delete-btn"
-                        onClick={() => deleteItem(item.item)}
+                        onClick={() => deleteItem(item.id)}
                       >
                         <img src={XIcon} alt="Delete" />
-                      </button> */}
+                      </button>
                     </motion.div>
                   ))}
                 </AnimatePresence>
