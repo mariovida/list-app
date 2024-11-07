@@ -19,7 +19,7 @@ const Home = () => {
   const [displayedSvgList, setDisplayedSvgList] = useState<string[]>([]);
   const updateDisplayedSvgList = () => {
     const isMobile = window.innerWidth < 769;
-    setDisplayedSvgList(isMobile ? svgList.slice(0, 3) : svgList);
+    setDisplayedSvgList(isMobile ? svgList.slice(0, 2) : svgList);
   };
 
   useEffect(() => {

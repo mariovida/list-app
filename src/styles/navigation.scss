@@ -8,6 +8,10 @@ nav {
   .wrapper {
     padding: 10px 16px;
     border-bottom: 2px solid $c-4;
+
+    @media screen and (max-width: 768px) {
+      height: 62px;
+    }
   }
 }
 .navigation {
