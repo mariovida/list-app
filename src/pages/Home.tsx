@@ -38,14 +38,14 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>AddIt</title>
+        <title>add.it</title>
       </Helmet>
 
       <section className="home-hero">
         <div className="wrapper">
           <div className="home-hero_box">
             <div className="home-hero_content">
-              <h1>One List, All Voices</h1>
+              <h1>One list, all voices</h1>
               <h3>Collaborate, create, conquer.</h3>
               <p>
                 Create your dream grocery list with friends, plan the ultimate

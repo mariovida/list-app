@@ -87,7 +87,7 @@ const ListPage = () => {
   return (
     <>
       <Helmet>
-        <title>List | AddIt</title>
+        <title>List | add.iz</title>
       </Helmet>
       <section className="list">
         <div className="wrapper">
