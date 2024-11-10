@@ -13,6 +13,7 @@ interface Item {
   id: string;
   created_at: string;
   item: string;
+  checked: boolean;
 }
 
 const ListPage = () => {
@@ -32,7 +33,6 @@ const ListPage = () => {
     axios
       .get(`${backendUrl}/api/lists/${uuid}`)
       .then((res) => {
-        console.log(res);
         setListName(res.data.list.name || "Unnamed List");
         setItems(res.data.items || []);
       })
@@ -74,6 +74,16 @@ const ListPage = () => {
       });
   };
 
+  const toggleChecked = (itemId: string, checked: boolean) => {
+    axios
+      .put(`${backendUrl}/api/lists/${uuid}/items/${itemId}`, {
+        checked: !checked,
+      })
+      .catch((error) => {
+        console.error("Error toggling item status:", error);
+      });
+  };
+
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
@@ -98,14 +108,22 @@ const ListPage = () => {
                 <AnimatePresence>
                   {items.map((item) => (
                     <motion.div
-                      className="list-item"
+                      className={`list-item ${item.checked ? "checked" : ""}`}
                       key={item.id}
                       variants={itemVariants}
                       initial="hidden"
                       animate="visible"
                       exit="exit"
                     >
-                      <span>{item.item}</span>
+                      <label className="checkbox-container">
+                        <input
+                          type="checkbox"
+                          checked={item.checked}
+                          onChange={() => toggleChecked(item.id, item.checked)}
+                        />
+
+                        <span>{item.item}</span>
+                      </label>
                       <button
                         className="delete-btn"
                         onClick={() => deleteItem(item.id)}
@@ -121,7 +139,7 @@ const ListPage = () => {
               <p className="list-add_title">Add item</p>
               <input
                 type="text"
-                value={input}
+                value={input || ""}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="What would you like to add?"
               />
@@ -149,7 +167,7 @@ const ListPage = () => {
             <>
               <input
                 type="text"
-                value={input}
+                value={input || ""}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Add an item"
               />

@@ -19,7 +19,7 @@
 
   &-items {
     padding: 0;
-    height: 500px;
+    height: 600px;
 
     &_content {
       display: flex;
@@ -43,6 +43,38 @@
     padding: 14px 16px;
     border: 2px solid $c-4;
     border-radius: 6px;
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $c-8;
+      border-radius: 50%;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .checkbox-container input[type="checkbox"]:checked {
+      background-color: $c-8;
+    }
+
+    .checkbox-container input[type="checkbox"]:checked::after {
+      content: "";
+      display: block;
+    }
+
+    &.checked span {
+      text-decoration: line-through;
+      color: $c-7;
+    }
 
     .delete-btn {
       width: 22px;
@@ -194,6 +226,16 @@
 @media screen and (max-width: 768px) {
   .list-items {
     width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    border: 0;
+
+    &_content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0;
+    }
   }
   .list {
     &-add {
