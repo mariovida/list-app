@@ -2,6 +2,12 @@
   margin-top: 40px;
   margin-bottom: 60px;
 
+  &-name {
+    background-color: $c-9;
+    color: $c-3;
+    padding: 60px 0;
+  }
+
   &-box {
     display: flex;
     gap: 40px;
@@ -22,6 +28,7 @@
     height: 600px;
 
     &_content {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -30,7 +37,21 @@
       overflow-y: scroll;
 
       &::-webkit-scrollbar {
-        display: none;
+        position: absolute;
+        width: 0px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 5px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $c-9;
+        border-radius: 5px;
       }
     }
   }
@@ -49,26 +70,27 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-    }
 
-    .checkbox-container input[type="checkbox"] {
-      appearance: none;
-      width: 15px;
-      height: 15px;
-      border: 2px solid $c-8;
-      border-radius: 50%;
-      position: relative;
-      outline: none;
-      cursor: pointer;
-    }
+      input[type="checkbox"] {
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border: 2px solid $c-8;
+        border-radius: 50%;
+        position: relative;
+        outline: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
 
-    .checkbox-container input[type="checkbox"]:checked {
-      background-color: $c-8;
-    }
+        &:checked {
+          background-color: $c-8;
 
-    .checkbox-container input[type="checkbox"]:checked::after {
-      content: "";
-      display: block;
+          &::after {
+            content: "";
+            display: block;
+          }
+        }
+      }
     }
 
     &.checked span {
@@ -152,10 +174,10 @@
       z-index: 99;
       width: 100%;
       min-height: 20px;
-      padding: 24px 20px;
+      padding: 28px 20px;
       background-color: $c-9;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
       transition: height 0.3s;
 
       &--open {
@@ -193,7 +215,7 @@
         transition: height 0.5s, padding 0.5s;
 
         &--open {
-          height: 200px;
+          height: 180px;
         }
 
         input,
@@ -235,9 +257,15 @@
       flex-direction: column;
       gap: 16px;
       padding: 0;
+      padding-right: 4px;
     }
   }
   .list {
+    margin-top: 0;
+    &-name {
+      padding: 40px 0;
+    }
+
     &-add {
       display: none;
 

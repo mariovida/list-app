@@ -99,9 +99,13 @@ const ListPage = () => {
       <Helmet>
         <title>List | add.iz</title>
       </Helmet>
-      <section className="list">
+      <section className="list-name">
         <div className="wrapper">
           <h1>{listName}</h1>
+        </div>
+      </section>
+      <section className="list">
+        <div className="wrapper">
           <div className="list-box">
             <div className="list-items">
               <div className="list-items_content">
@@ -121,7 +125,6 @@ const ListPage = () => {
                           checked={item.checked}
                           onChange={() => toggleChecked(item.id, item.checked)}
                         />
-
                         <span>{item.item}</span>
                       </label>
                       <button
