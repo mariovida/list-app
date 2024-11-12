@@ -57,7 +57,7 @@
     button {
       font-size: 14px;
       font-weight: 600;
-      padding: 8px 16px;
+      padding: 14px 16px;
       transition: background-color 0.3s;
 
       &:nth-child(1):hover {
@@ -65,7 +65,7 @@
       }
 
       &:nth-child(2) {
-        padding: 8px 12px;
+        padding: 14px 12px;
         color: $c-7;
         background-color: transparent;
 
