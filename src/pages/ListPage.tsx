@@ -102,6 +102,11 @@ const ListPage = () => {
       <section className="list-name">
         <div className="wrapper">
           <h1>{listName}</h1>
+          <div className="list-name_info">
+            <p>
+              {items.length} {items.length === 1 ? "item" : "items"}
+            </p>
+          </div>
         </div>
       </section>
       <section className="list">
@@ -122,7 +127,7 @@ const ListPage = () => {
                       <label className="checkbox-container">
                         <input
                           type="checkbox"
-                          checked={item.checked}
+                          checked={item.checked || false}
                           onChange={() => toggleChecked(item.id, item.checked)}
                         />
                         <span>{item.item}</span>

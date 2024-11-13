@@ -6,6 +6,13 @@
     background-color: $c-9;
     color: $c-3;
     padding: 60px 0;
+
+    &_info {
+      margin-top: 5px;
+      p {
+        font-size: 15px;
+      }
+    }
   }
 
   &-box {
@@ -59,6 +66,7 @@
   &-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 16px;
     line-height: 18px;
     padding: 14px 16px;
@@ -194,6 +202,7 @@
         height: 22px;
         background-color: transparent;
         border: 0;
+        cursor: pointer;
 
         span {
           font-size: 18px;
@@ -220,6 +229,7 @@
 
         input,
         button {
+          font-family: "Plus Jakarta sans", sans-serif;
           font-size: 15px;
           line-height: 16px;
           padding: 14px 10px;
@@ -262,9 +272,6 @@
   }
   .list {
     margin-top: 0;
-    &-name {
-      padding: 40px 0;
-    }
 
     &-add {
       display: none;
