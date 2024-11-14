@@ -97,7 +97,7 @@ const ListPage = () => {
   return (
     <>
       <Helmet>
-        <title>List | add.iz</title>
+        <title>{listName} | add.it</title>
       </Helmet>
       <section className="list-name">
         <div className="wrapper">
@@ -114,6 +114,11 @@ const ListPage = () => {
           <div className="list-box">
             <div className="list-items">
               <div className="list-items_content">
+                {items.length === 0 ? (
+                  <p className="no-items">
+                    Your list is empty. Start adding items to get started.
+                  </p>
+                ) : null}
                 <AnimatePresence>
                   {items.map((item) => (
                     <motion.div

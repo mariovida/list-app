@@ -12,6 +12,7 @@ const Navigation = () => {
           <div>
             <NavLink to="/" className="home-link">
               <img src={Logo} alt="Logo" />
+              <span>add.it</span>
             </NavLink>
           </div>
           <div>{/* <NavLink to="/find">Find list</NavLink> */}</div>

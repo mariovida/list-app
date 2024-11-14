@@ -28,8 +28,32 @@ nav {
     text-decoration: none;
 
     &.home-link {
-      width: 40px;
+      display: flex;
+      align-items: center;
+      min-width: 40px;
+      width: auto;
       height: 40px;
+
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+
+        @media screen and (max-width: 768px) {
+          margin-right: 6px;
+        }
+      }
+
+      span {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 40px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 17px;
+        }
+      }
     }
   }
 }
