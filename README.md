@@ -2,6 +2,8 @@
 
 The frontend for **add.it**, a simple and intuitive app for creating, managing and sharing lists.
 
+<img src="/images/print1.png" />
+
 ## Features
 
 - Create new lists with unique names
