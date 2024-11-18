@@ -22,6 +22,7 @@ const ListPage = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [input, setInput] = useState<string>("");
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const socket = React.useRef<any>(null);
   let backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -30,14 +31,17 @@ const ListPage = () => {
   }
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${backendUrl}/api/lists/${uuid}`)
       .then((res) => {
         setListName(res.data.list.name || "Unnamed List");
         setItems(res.data.items || []);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching list data:", error);
+        setLoading(false);
       });
 
     socket.current = io(backendUrl);
@@ -114,7 +118,9 @@ const ListPage = () => {
           <div className="list-box">
             <div className="list-items">
               <div className="list-items_content">
-                {items.length === 0 ? (
+                {loading ? (
+                  <div className="loader"></div>
+                ) : items.length === 0 ? (
                   <p className="no-items">
                     Your list is empty. Start adding items to get started.
                   </p>
