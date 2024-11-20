@@ -23,6 +23,11 @@ body {
 }
 #root {
   min-height: 100vh;
+  padding-top: 60px;
+
+  @media screen and (max-width: 768px) {
+    padding-top: 62px;
+  }
 }
 
 .wrapper {
