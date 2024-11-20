@@ -14,6 +14,7 @@ interface Item {
   created_at: string;
   item: string;
   checked: boolean;
+  quantity: number;
 }
 
 const ListPage = () => {
@@ -22,6 +23,7 @@ const ListPage = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [input, setInput] = useState<string>("");
   const [isMobileAddOpen, setIsMobileAddOpen] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
   const socket = React.useRef<any>(null);
@@ -57,9 +59,10 @@ const ListPage = () => {
   const addItem = () => {
     if (input.trim() !== "") {
       axios
-        .post(`${backendUrl}/api/lists/${uuid}`, { item: input })
+        .post(`${backendUrl}/api/lists/${uuid}`, { item: input, quantity })
         .then(() => {
           setInput("");
+          setQuantity(0);
         })
         .catch((error) => {
           console.error("Error adding item:", error);
@@ -85,6 +88,16 @@ const ListPage = () => {
       })
       .catch((error) => {
         console.error("Error toggling item status:", error);
+      });
+  };
+
+  const updateItemQuantity = (itemId: string, quantity: number) => {
+    axios
+      .put(`${backendUrl}/api/lists/${uuid}/items/${itemId}/quantity`, {
+        quantity,
+      })
+      .catch((error) => {
+        console.error("Error updating item quantity:", error);
       });
   };
 
@@ -143,12 +156,50 @@ const ListPage = () => {
                         />
                         <span>{item.item}</span>
                       </label>
-                      <button
-                        className="delete-btn"
-                        onClick={() => deleteItem(item.id)}
-                      >
-                        <img src={XIcon} alt="Delete" />
-                      </button>
+                      <div className="list-item_controls">
+                        <div className="quantity-controls">
+                          <button
+                            onClick={() => {
+                              if (item.quantity > 0) {
+                                const newQuantity = item.quantity - 1;
+                                updateItemQuantity(item.id, newQuantity);
+                                setItems((prevItems) =>
+                                  prevItems.map((prevItem) =>
+                                    prevItem.id === item.id
+                                      ? { ...prevItem, quantity: newQuantity }
+                                      : prevItem
+                                  )
+                                );
+                              }
+                            }}
+                            disabled={item.quantity <= 0}
+                          >
+                            -
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            onClick={() => {
+                              const newQuantity = item.quantity + 1;
+                              updateItemQuantity(item.id, newQuantity);
+                              setItems((prevItems) =>
+                                prevItems.map((prevItem) =>
+                                  prevItem.id === item.id
+                                    ? { ...prevItem, quantity: newQuantity }
+                                    : prevItem
+                                )
+                              );
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
+                        <button
+                          className="delete-btn"
+                          onClick={() => deleteItem(item.id)}
+                        >
+                          <img src={XIcon} alt="Delete" />
+                        </button>
+                      </div>
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -162,6 +213,17 @@ const ListPage = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="What would you like to add?"
               />
+              <div className="quantity-controls">
+                <button
+                  onClick={() => setQuantity((prev) => Math.max(0, prev - 1))}
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button onClick={() => setQuantity((prev) => prev + 1)}>
+                  +
+                </button>
+              </div>
               <button onClick={addItem}>Add Item</button>
             </div>
           </div>

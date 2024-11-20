@@ -38,9 +38,11 @@ h4 {
   cursor: default;
 }
 h1 {
+  min-height: 46px;
   font-size: 36px;
 
   @media screen and (max-width: 768px) {
+    min-height: 36px;
     font-size: 28px;
   }
 }

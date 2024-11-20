@@ -7,6 +7,10 @@
     color: $c-3;
     padding: 60px 0;
 
+    @media screen and (max-width: 768px) {
+      padding: 40px 0;
+    }
+
     &_info {
       margin-top: 5px;
       p {
@@ -96,6 +100,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     font-size: 16px;
     line-height: 18px;
     padding: 14px 16px;
@@ -105,13 +110,15 @@
     .checkbox-container {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
+      min-height: 28px;
       cursor: pointer;
 
       input[type="checkbox"] {
         appearance: none;
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
         border: 2px solid $c-8;
         border-radius: 50%;
         position: relative;
@@ -133,6 +140,35 @@
     &.checked span {
       text-decoration: line-through;
       color: $c-7;
+    }
+
+    &_controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        background-color: $c-3;
+
+        button {
+          line-height: 22px;
+          color: $c-1;
+          background-color: $c-11;
+          padding: 3px 8px;
+          border: 0;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+
+        span {
+          width: 35px;
+          font-size: 14px;
+          text-align: center;
+          line-height: 28px;
+        }
+      }
     }
 
     .delete-btn {
@@ -201,6 +237,11 @@
       &:hover {
         background-color: $c-9;
       }
+    }
+
+    .quantity-controls {
+      display: none; // flex
+      margin-top: auto;
     }
 
     &_mobile {
@@ -301,6 +342,17 @@
   }
   .list {
     margin-top: 0;
+    padding-bottom: 50px;
+
+    &-item {
+      gap: 18px;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &_controls {
+        align-self: flex-end;
+      }
+    }
 
     &-add {
       display: none;
