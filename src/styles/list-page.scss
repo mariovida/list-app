@@ -164,9 +164,11 @@
 
         span {
           width: 35px;
-          font-size: 14px;
+          font-size: 15px;
           text-align: center;
           line-height: 28px;
+          color: $c-11 !important;
+          text-decoration: none !important;
         }
       }
     }
