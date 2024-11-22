@@ -48,7 +48,7 @@
 
 @media screen and (max-width: 768px) {
   .home-hero {
-    padding: 50px 0 60px 0;
+    padding: 60px 0;
 
     &_box {
       flex-direction: column-reverse;
@@ -60,6 +60,7 @@
     }
 
     &_lists {
+      display: none;
       width: 100%;
 
       img {
