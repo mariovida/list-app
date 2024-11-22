@@ -12,6 +12,7 @@ import Svg3 from "../assets/list-3.svg";
 import Svg4 from "../assets/list-4.svg";
 import Svg5 from "../assets/list-5.svg";
 import Svg6 from "../assets/list-6.svg";
+import Illustration1 from "/illustration_1.svg";
 
 const svgList = [Svg1, Svg2, Svg3, Svg4, Svg5, Svg6];
 
@@ -69,6 +70,40 @@ const Home = () => {
                 />
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-welcome">
+        <div className="wrapper">
+          <div className="home-welcome_box">
+            <div className="home-welcome_content">
+              <h2>Make lists. Share. Enjoy.</h2>
+              <p>
+                Whether you're planning groceries, preparing for a trip or
+                organizing a party, this app ensures you never miss a thing.
+              </p>
+              <p>
+                Customizable items
+                <span>
+                  Add details like quantities and check off completed tasks.
+                </span>
+              </p>
+              <p>
+                Real-Time updates
+                <span>
+                  Collaborate with friends, family or coworkers. Changes are
+                  updated instantly for everyone.
+                </span>
+              </p>
+              <p>
+                Access anywhere
+                <span>
+                  Use the app on any device, anytime — at home or on the go.
+                </span>
+              </p>
+            </div>
+            <img src={Illustration1} />
           </div>
         </div>
       </section>

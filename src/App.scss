@@ -2,6 +2,7 @@
 
 @import "./styles/navigation.scss";
 
+@import "./styles/home-hero.scss";
 @import "./styles/home.scss";
 @import "./styles/create-form.scss";
 @import "./styles/list-page.scss";
@@ -38,6 +39,7 @@ body {
 
 /* Typography */
 h1,
+h2,
 h3,
 h4 {
   cursor: default;
@@ -49,6 +51,13 @@ h1 {
   @media screen and (max-width: 768px) {
     min-height: 36px;
     font-size: 28px;
+  }
+}
+h2 {
+  font-size: 28px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 22px;
   }
 }
 h3 {

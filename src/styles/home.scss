@@ -1,69 +1,85 @@
-.home-hero {
-  min-height: calc(100vh - 62px);
-  padding: 30px 0;
-  background-color: $c-2;
+.home {
+  &-welcome {
+    padding: 80px 0;
 
-  &_box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-  }
-
-  &_content {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-
-    h3 {
-      margin: 4px 0 24px;
+    @media screen and (max-width: 768px) {
+      padding: 60px 0;
     }
-
-    p {
-      //display: block;
-      max-width: 530px;
-      width: 100%;
-      font-weight: 500;
-      color: $c-7;
-      margin-bottom: 4px;
-
-      &:last-of-type {
-        margin: 0;
-      }
-    }
-  }
-
-  &_lists {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    img {
-      max-width: 300px;
-      width: 100%;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .home-hero {
-    padding: 40px 0 60px 0;
 
     &_box {
-      flex-direction: column-reverse;
+      display: flex;
+      align-items: center;
       gap: 40px;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+        gap: 50px;
+      }
+
+      img {
+        width: 40%;
+
+        @media screen and (max-width: 768px) {
+          width: 90%;
+        }
+      }
     }
 
     &_content {
-      width: 100%;
-    }
+      width: 60%;
+      display: flex;
+      flex-direction: column;
 
-    &_lists {
-      width: 100%;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
 
-      img {
-        max-width: 240px;
+      h2 {
+        margin-bottom: 24px;
+      }
+
+      p {
+        position: relative;
+        max-width: 530px;
+        width: 100%;
+        font-weight: 700;
+        color: $c-9;
+        margin-bottom: 16px;
+        padding-left: 28px;
+
+        &:first-of-type {
+          font-weight: 500;
+          color: $c-7;
+          margin-bottom: 60px;
+          padding-left: 0;
+
+          @media screen and (max-width: 768px) {
+            margin-bottom: 40px;
+          }
+
+          &::before {
+            display: none;
+          }
+        }
+
+        &::before {
+          content: "";
+          width: 8px;
+          height: 8px;
+          background-color: $c-11;
+          border-radius: 50%;
+          box-shadow: 0 0 8px $c-11, 0 0 14px $c-4;
+          position: absolute;
+          left: 4px;
+          top: 8px;
+        }
+
+        span {
+          display: block;
+          font-weight: 500;
+          color: $c-7;
+          margin-top: 4px;
+        }
       }
     }
   }
