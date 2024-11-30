@@ -1,0 +1,73 @@
+@import "./styles/colors.scss";
+
+@import "./styles/navigation.scss";
+
+@import "./styles/home.scss";
+@import "./styles/create-form.scss";
+@import "./styles/list-page.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  position: relative;
+  font-family: "Plus jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $c-1;
+  color: $c-11;
+}
+#root {
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Typography */
+h1,
+h3,
+h4 {
+  cursor: default;
+}
+h1 {
+  font-size: 36px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+}
+h3 {
+  font-size: 22px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+
+  span {
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+p {
+  font-size: 16px;
+
+  /*@media screen and (max-width: 768px) {
+    font-size: 15px;
+  }*/
+}

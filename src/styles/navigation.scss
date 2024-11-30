@@ -1,0 +1,27 @@
+nav {
+  margin-bottom: 40px;
+
+  .wrapper {
+    padding: 12px 16px;
+    border-bottom: 2px solid $c-4;
+  }
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+
+  a {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: $c-11;
+    text-decoration: none;
+
+    &.home-link {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

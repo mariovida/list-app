@@ -1,0 +1,85 @@
+.create-list {
+  max-width: 420px;
+  width: 100%;
+  margin-top: 50px;
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    background-color: $c-1;
+    border: 2px solid $c-4;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px #0f3b871f;
+
+    input,
+    button {
+      font-family: "Plus jakarta Sans", sans-serif;
+      font-size: 14px;
+      line-height: 17px;
+      padding: 12px;
+      border: 2px solid $c-4;
+      border-radius: 6px;
+
+      &:focus {
+        outline: 0;
+        border: 2px solid $c-5;
+      }
+    }
+
+    button {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $c-2;
+      background-color: $c-11;
+      margin-top: auto;
+      cursor: pointer;
+      border: 0;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $c-9;
+      }
+
+      &:focus {
+        outline: 0;
+        border: 0;
+      }
+    }
+  }
+
+  &_success {
+    display: flex;
+    gap: 16px;
+
+    button {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+
+      &:nth-child(2) {
+        padding: 8px 10px;
+        color: $c-11;
+        background-color: transparent;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: $c-3;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .create-list {
+    max-width: unset;
+    margin-top: 40px;
+
+    &_form {
+      padding: 20px;
+    }
+  }
+}

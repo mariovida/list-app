@@ -1,0 +1,115 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { io } from "socket.io-client";
+import { motion, AnimatePresence } from "framer-motion";
+
+import XIcon from "../assets/x.svg";
+import "../App.scss";
+
+const ListPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const [listName, setListName] = useState<string>("");
+  const [items, setItems] = useState<string[]>([]);
+  const [input, setInput] = useState<string>("");
+
+  const socket = React.useRef<any>(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/api/lists/${id}`)
+      .then((res) => {
+        setListName(res.data.name || "Unnamed List");
+        setItems(res.data.items || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching list data:", error);
+      });
+
+    socket.current = io(backendUrl);
+    socket.current.emit("joinList", id);
+    socket.current.on("listUpdated", (updatedList: string[]) => {
+      setItems(updatedList);
+    });
+    return () => {
+      socket.current.disconnect();
+    };
+  }, [id, backendUrl]);
+
+  const addItem = () => {
+    if (input.trim() !== "") {
+      axios
+        .post(`${backendUrl}/api/lists/${id}`, { item: input })
+        .then(() => {
+          setInput("");
+        })
+        .catch((error) => {
+          console.error("Error adding item:", error);
+        });
+    }
+  };
+
+  const deleteItem = (item: string) => {
+    axios
+      .delete(`${backendUrl}/api/lists/${id}/item`, { data: { item } })
+      .then(() => {
+        setItems((prevItems) => prevItems.filter((i) => i !== item));
+      })
+      .catch((error) => {
+        console.error("Error deleting item:", error);
+      });
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+  };
+
+  return (
+    <section className="list">
+      <div className="wrapper">
+        <h1>{listName}</h1>
+        <div className="list-box">
+          <div className="list-items">
+            <div className="list-items_content">
+              <AnimatePresence>
+                {items.map((item, index) => (
+                  <motion.div
+                    className="list-item"
+                    key={item}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                  >
+                    <span>{item}</span>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteItem(item)}
+                    >
+                      <img src={XIcon} alt="Delete" />
+                    </button>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+          <div className="list-add">
+            <p className="list-add_title">Add item</p>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="What would you like to add?"
+            />
+            <button onClick={addItem}>Add Item</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ListPage;
